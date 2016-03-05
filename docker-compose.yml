@@ -1,0 +1,24 @@
+version: '2'
+services:
+    web:
+        image: apache/test
+        container_name: webtest
+        environment:
+            APP_ENV: local-docker
+        build: 
+            context: .
+            dockerfile: Dockerfile.web
+        ports:
+            - '81:80'
+        volumes:
+            - ../www/:/work/
+        depends_on:
+            - mysql
+    mysql:
+        build:
+            context: .
+            dockerfile: Dockerfile.db
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        image: mysql/test
+        container_name: dbtest
