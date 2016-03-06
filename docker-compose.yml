@@ -5,9 +5,7 @@ services:
         container_name: webtest
         environment:
             APP_ENV: local-docker
-        build: 
-            context: .
-            dockerfile: Dockerfile.web
+        build: ./web
         ports:
             - '81:80'
         volumes:
@@ -15,9 +13,7 @@ services:
         depends_on:
             - mysql
     mysql:
-        build:
-            context: .
-            dockerfile: Dockerfile.db
+        build: ./db
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
         image: mysql/test
