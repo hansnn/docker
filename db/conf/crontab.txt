@@ -1,0 +1,1 @@
+0 12 * * * mysql -uroot odds < /sqldumps/dump.sql

@@ -1,20 +1,22 @@
 version: '2'
 services:
     web:
-        image: apache/test
-        container_name: webtest
+        image: loweb/web
+        container_name: loweb
         environment:
             APP_ENV: local-docker
         build: ./web
         ports:
             - '81:80'
         volumes:
-            - ../www/:/work/
+            - ../:/work/
         depends_on:
             - mysql
     mysql:
+        image: loweb/mysql
         build: ./db
+        container_name: loweb-database
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        image: mysql/test
-        container_name: dbtest
+        volumes:
+            - ./db/sqldumps/:/sqldumps/
